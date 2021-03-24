@@ -19,12 +19,7 @@ namespace OndalıkTarihBulucu
             InitializeComponent();
         }
 
-
-
-
-
-
-
+        #region Ondalık tarihi çevir     
         private void button1_Click(object sender, EventArgs e)
         {
             string tarihSonuc = "";
@@ -122,7 +117,6 @@ namespace OndalıkTarihBulucu
                 }
 
                 #endregion
-
                 #region AyYazi
 
 
@@ -151,8 +145,6 @@ namespace OndalıkTarihBulucu
 
 
                 #endregion
-
-
                 #region GunYazi
 
                 int gun = Convert.ToInt32(txtGun.Text);
@@ -185,59 +177,12 @@ namespace OndalıkTarihBulucu
 
                 #endregion
 
-
                 tarihSonuc = tarihG + " \n \n " + tarihA + " \n \n " + tarihY;
                 lblTarih.Text = tarihSonuc;
             }
             else
             {
                 MessageBox.Show("Bütün alanları doldurmanız gerekmektedir!!");
-            }
-
-        }
-
-
-
-        private void txtTarih_KeyPress(object sender, KeyPressEventArgs e)
-        {
-            if (!Char.IsDigit(e.KeyChar) && !Char.IsControl(e.KeyChar))
-            {
-                e.Handled = true;
-            }
-        }
-
-
-
-        private void txtAy_KeyPress(object sender, KeyPressEventArgs e)
-        {
-            if (!Char.IsLetter(e.KeyChar) && !Char.IsControl(e.KeyChar))
-            {
-                e.Handled = true;
-            }
-        }
-
-        private void txtYil_KeyPress(object sender, KeyPressEventArgs e)
-        {
-            if (!Char.IsDigit(e.KeyChar) && !Char.IsControl(e.KeyChar))
-            {
-                e.Handled = true;
-            }
-
-            if (txtYil.TextLength > 3 && !Char.IsControl(e.KeyChar))
-            {
-                e.Handled = true;
-            }
-        }
-
-        private void txtGun_KeyPress(object sender, KeyPressEventArgs e)
-        {
-            if (!Char.IsControl(e.KeyChar) && !Char.IsDigit(e.KeyChar))
-            {
-                e.Handled = true;
-            }
-            if (txtGun.TextLength > 1 && !Char.IsControl(e.KeyChar))
-            {
-                e.Handled = true;
             }
 
         }
@@ -250,7 +195,7 @@ namespace OndalıkTarihBulucu
             int yil = 0;
 
             #region Yil
-            if (cmbTaban.SelectedIndex==0)
+            if (cmbTaban.SelectedIndex == 0)
             {
                 try
                 {
@@ -300,7 +245,7 @@ namespace OndalıkTarihBulucu
                     lblSonucSene.Text = hata.ToString();
                 }
             }
-            else if (cmbTaban.SelectedIndex==1)
+            else if (cmbTaban.SelectedIndex == 1)
             {
                 try
                 {
@@ -350,8 +295,6 @@ namespace OndalıkTarihBulucu
                     lblSonucSene.Text = hata.ToString();
                 }
             }
-
-
             #endregion
 
             #region Ay
@@ -423,11 +366,11 @@ namespace OndalıkTarihBulucu
             #endregion
 
             #region Haftanın Günü
-            string[] gunler = { "Pazar", "Pazartesi", "Salı", "Çarşamba", "Perşembe", "Cuma","Cumartesi" };
+            string[] gunler = { "Pazar", "Pazartesi", "Salı", "Çarşamba", "Perşembe", "Cuma", "Cumartesi" };
             string gunHft = "";
             int secim = cmbHaftaGunu.SelectedIndex;
-           
-            if (secim==-1)
+
+            if (secim == -1)
             {
                 labelSonucHaftaGunu.Text = "";
             }
@@ -435,7 +378,7 @@ namespace OndalıkTarihBulucu
             {
                 gunHft = gunler[secim];
                 labelSonucHaftaGunu.Text = gunHft;
-            }            
+            }
 
             #endregion
             labelSonucHaftaGunu.Font = new Font("Tahoma", 14F);
@@ -448,12 +391,37 @@ namespace OndalıkTarihBulucu
             lblSonucAy.ForeColor = Color.Blue;
             lblSonucSene.ForeColor = Color.Blue;
         }
+        #endregion
 
+        #region Tarihi ondalık yazıya çevir     
+        private void txtYil_KeyPress(object sender, KeyPressEventArgs e)
+        {
+            if (!Char.IsDigit(e.KeyChar) && !Char.IsControl(e.KeyChar))
+            {
+                e.Handled = true;
+            }
+
+            if (txtYil.TextLength > 3 && !Char.IsControl(e.KeyChar))
+            {
+                e.Handled = true;
+            }
+        }
+        private void txtGun_KeyPress(object sender, KeyPressEventArgs e)
+        {
+            if (!Char.IsControl(e.KeyChar) && !Char.IsDigit(e.KeyChar))
+            {
+                e.Handled = true;
+            }
+            if (txtGun.TextLength > 1 && !Char.IsControl(e.KeyChar))
+            {
+                e.Handled = true;
+            }
+
+        }
         private void cmbAy_SelectedIndexChanged(object sender, EventArgs e)
         {
             cmbAy.ForeColor = Color.Black;
         }
-
         private void txtGun_TextChanged(object sender, EventArgs e)
         {
             if (txtGun.Text.Length > 1 && Char.IsDigit(txtGun.Text.ToCharArray().LastOrDefault()))
@@ -466,13 +434,13 @@ namespace OndalıkTarihBulucu
             }
 
         }
+        #endregion
 
-
+        #region Ebced tarih çevir
         public int tarihEbced = 0;
         public char[] harfler = {'ا','ب','ج','د','ه','و','ز','ح','ط', 'ي', 'ك', 'ل', 'م', 'ن',
             'س', 'ع', 'ف', 'ص', 'ق', 'ر', 'ش', 'ت', 'ث', 'خ', 'ذ', 'ض', 'ظ', 'غ' };
         public int[] ebcedDegerleri = { 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 20, 30, 40, 50, 60, 70, 80, 90, 100, 200, 300, 400, 500, 600, 700, 800, 900, 1000 };
-
 
 
         private void richTextBox1_TextChanged(object sender, EventArgs e)
@@ -495,7 +463,6 @@ namespace OndalıkTarihBulucu
             lblSonuc.Text = tarihEbced.ToString();
 
         }
-
         private void richTextBox1_KeyPress(object sender, KeyPressEventArgs e)
         {
 
@@ -513,8 +480,82 @@ namespace OndalıkTarihBulucu
                 e.Handled = false;
             }
         }
+        #endregion
 
+        #region Hicri ve miladiyi karşılıklı dönüştürme
         private void hicriGun_TextChanged(object sender, EventArgs e)
+        {
+            MiladiyeCevir();
+        }
+        private void hicriAy_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            hicriAy.ForeColor = Color.Black;
+            MiladiyeCevir();
+        }
+        private void hicriYil_TextChanged(object sender, EventArgs e)
+        {
+            MiladiyeCevir();
+        }
+        private void miladiYil_TextChanged(object sender, EventArgs e)
+        {
+            HicriyeCevir();
+        }
+        private void miladiGun_TextChanged(object sender, EventArgs e)
+        {
+           HicriyeCevir();
+        }
+        private void miladiAy_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            miladiAy.ForeColor = Color.Black;
+            HicriyeCevir();
+        }
+        private void hicriGun_KeyPress(object sender, KeyPressEventArgs e)
+        {
+            if (!Char.IsDigit(e.KeyChar) && !Char.IsControl(e.KeyChar))
+            {
+                e.Handled = true;
+            }
+            if (hicriGun.TextLength > 1 && !Char.IsControl(e.KeyChar))
+            {
+                e.Handled = true;
+            }
+
+        }
+        private void hicriYil_KeyPress(object sender, KeyPressEventArgs e)
+        {
+            if (!Char.IsDigit(e.KeyChar) && !Char.IsControl(e.KeyChar))
+            {
+                e.Handled = true;
+            }
+            if (hicriYil.TextLength > 5 && !Char.IsControl(e.KeyChar))
+            {
+                e.Handled = true;
+            }
+
+        }
+        private void miladiGun_KeyPress(object sender, KeyPressEventArgs e)
+        {
+            if (!Char.IsDigit(e.KeyChar) && !Char.IsControl(e.KeyChar))
+            {
+                e.Handled = true;
+            }
+            if (miladiGun.TextLength > 1 && !Char.IsControl(e.KeyChar))
+            {
+                e.Handled = true;
+            }
+        }
+        private void miladiYil_KeyPress(object sender, KeyPressEventArgs e)
+        {
+            if (!Char.IsDigit(e.KeyChar) && !Char.IsControl(e.KeyChar))
+            {
+                e.Handled = true;
+            }
+            if (miladiYil.TextLength > 3 && !Char.IsControl(e.KeyChar))
+            {
+                e.Handled = true;
+            }
+        }
+        private void MiladiyeCevir()
         {
             try
             {
@@ -557,8 +598,6 @@ namespace OndalıkTarihBulucu
                                     miladiT = miladiTarih.Day.ToString() + " " + mAy + " " + miladiTarih.Year.ToString() + " " + miladiTarih.DayOfWeek;
                                     lblMiladi.Text = miladiT;
                                     break;
-
-
                                 }
                             }
                             break;
@@ -567,119 +606,12 @@ namespace OndalıkTarihBulucu
                 }
 
             }
-            catch 
+            catch
             {
 
-            }
-
-            
-        }
-
-        private void hicriAy_SelectedIndexChanged(object sender, EventArgs e)
-        {
-            hicriAy.ForeColor = Color.Black;
-
-            if (hicriGun.Text.Length > 0 && hicriYil.Text.Length > 0 && hicriAy.SelectedIndex > -1)
-            {
-
-                char[] charsGun = hicriGun.Text.ToCharArray();
-                char[] charsYil = hicriYil.Text.ToCharArray();
-
-                foreach (var krk in charsGun)
-                {
-                    if (Char.IsDigit(krk))
-                    {
-                        foreach (var krk2 in charsYil)
-                        {
-                            if (Char.IsDigit(krk2))
-                            {
-
-                                string[] mAylar = { "Ocak", "Şubat","Mart","Nisan","Mayıs","Haziran","Temmuz",
-                "Ağustos","Eylül","Ekim","Kasım","Aralık"};
-
-                                string mAy = "";
-                                MiladiTarih miladiTarih = new MiladiTarih();
-                                HicriTarih hicriTarih = new HicriTarih();
-                                string miladiT = "";
-
-                                hicriTarih.Day = Convert.ToInt32(hicriGun.Text);
-                                hicriTarih.Month = Convert.ToInt32(hicriAy.SelectedIndex + 1);
-                                hicriTarih.Year = Convert.ToInt32(hicriYil.Text);
-
-                                miladiTarih = HijriMethods.HicriToMiladi(hicriTarih);
-                                mAy = mAylar[miladiTarih.Month - 1];
-
-                                miladiT = miladiTarih.Day.ToString() + " " + mAy + " " + miladiTarih.Year.ToString() + " " + miladiTarih.DayOfWeek;
-                                lblMiladi.Text = miladiT;
-                                break;
-                            }
-                        }
-                        break;
-                    }
-                }
             }
         }
-
-        private void hicriYil_TextChanged(object sender, EventArgs e)
-        {
-            try
-            {
-                if (hicriYil.Text.Length > 0 && Convert.ToInt32(hicriYil.Text) > 100000)
-                {
-                    MessageBox.Show("100000'den büyük yıllar hesaplanmamıştır.");
-                    hicriYil.Text = "1";
-                }
-                if (hicriGun.Text.Length > 0 && hicriYil.Text.Length > 0 && hicriAy.SelectedIndex > -1)
-                {
-
-                    char[] charsGun = hicriGun.Text.ToCharArray();
-                    char[] charsYil = hicriYil.Text.ToCharArray();
-
-                    foreach (var krk in charsGun)
-                    {
-                        if (Char.IsDigit(krk))
-                        {
-                            foreach (var krk2 in charsYil)
-                            {
-                                if (Char.IsDigit(krk2))
-                                {
-
-                                    string[] mAylar = { "Ocak", "Şubat","Mart","Nisan","Mayıs","Haziran","Temmuz",
-                "Ağustos","Eylül","Ekim","Kasım","Aralık"};
-
-                                    string mAy = "";
-                                    MiladiTarih miladiTarih = new MiladiTarih();
-                                    HicriTarih hicriTarih = new HicriTarih();
-                                    string miladiT = "";
-
-                                    hicriTarih.Day = Convert.ToInt32(hicriGun.Text);
-                                    hicriTarih.Month = Convert.ToInt32(hicriAy.SelectedIndex + 1);
-                                    hicriTarih.Year = Convert.ToInt32(hicriYil.Text);
-
-                                    miladiTarih = HijriMethods.HicriToMiladi(hicriTarih);
-                                    mAy = mAylar[miladiTarih.Month - 1];
-
-                                    miladiT = miladiTarih.Day.ToString() + " " + mAy + " " + miladiTarih.Year.ToString() + " " + miladiTarih.DayOfWeek;
-                                    lblMiladi.Text = miladiT;
-                                    break;
-
-                                }
-                            }
-                            break;
-                        }
-                    }
-                }
-
-            }
-            catch 
-            {
-
-            }
-
-           
-        }
-
-        private void miladiYil_TextChanged(object sender, EventArgs e)
+        private void HicriyeCevir()
         {
             try
             {
@@ -738,186 +670,11 @@ namespace OndalıkTarihBulucu
                 }
 
             }
-            catch 
+            catch
             {
 
-            }
-          
-        }
-
-        private void miladiGun_TextChanged(object sender, EventArgs e)
-        {
-            try
-            {
-                if (miladiGun.Text.Length > 0 && Convert.ToInt32(miladiGun.Text) > 31)
-                {
-                    MessageBox.Show("Gün 31'den büyük olamaz");
-                    miladiGun.Text = "1";
-                }
-
-                if (miladiGun.Text.Length > 0 && miladiYil.Text.Length > 0 && miladiAy.SelectedIndex > -1)
-                {
-
-                    char[] charsGun = miladiGun.Text.ToCharArray();
-                    char[] charsYil = miladiYil.Text.ToCharArray();
-
-                    foreach (var krk in charsGun)
-                    {
-                        if (Char.IsDigit(krk))
-                        {
-                            foreach (var krk2 in charsYil)
-                            {
-                                if (Char.IsDigit(krk2))
-                                {
-
-                                    string[] hAylar = { "Muharrem", "Safer","Rebiülevvel","Rebiülâhir","Cemâziyelevvel","Cemâziyelâhir",
-                "Receb","Şâban","Ramazan","Şevval","Zilkâde","Zilhicce"};
-
-                                    string hAy = "";
-                                    MiladiTarih miladiTarih = new MiladiTarih();
-                                    HicriTarih hicriTarih = new HicriTarih();
-                                    string hicriT = "";
-
-                                    miladiTarih.Day = Convert.ToInt32(miladiGun.Text);
-                                    miladiTarih.Month = Convert.ToInt32(miladiAy.SelectedIndex + 1);
-                                    miladiTarih.Year = Convert.ToInt32(miladiYil.Text);
-
-                                    hicriTarih = HijriMethods.MiladiToHicri(miladiTarih);
-                                    if (hicriTarih.Month == 0)
-                                    {
-                                        hAy = "";
-                                    }
-                                    else
-                                    {
-                                        hAy = hAylar[hicriTarih.Month - 1];
-                                    }
-                                    hicriT = hicriTarih.Day.ToString() + " " + hAy + " " + hicriTarih.Year.ToString() + " " + hicriTarih.DayOfWeek;
-                                    lblHicri.Text = hicriT;
-                                    break;
-
-
-                                }
-                            }
-                            break;
-                        }
-                    }
-                }
-
-            }
-            catch 
-            {
-
-            }
-          
-        }
-
-        private void miladiAy_SelectedIndexChanged(object sender, EventArgs e)
-        {
-            miladiAy.ForeColor = Color.Black;
-
-            if (miladiGun.Text.Length > 0 && miladiYil.Text.Length > 0 && miladiAy.SelectedIndex > -1)
-            {
-
-                char[] charsGun = miladiGun.Text.ToCharArray();
-                char[] charsYil = miladiYil.Text.ToCharArray();
-
-                foreach (var krk in charsGun)
-                {
-                    if (Char.IsDigit(krk))
-                    {
-                        foreach (var krk2 in charsYil)
-                        {
-                            if (Char.IsDigit(krk2))
-                            {
-
-                                string[] hAylar = { "Muharrem", "Safer","Rebiülevvel","Rebiülâhir","Cemâziyelevvel","Cemâziyelâhir",
-                "Receb","Şâban","Ramazan","Şevval","Zilkâde","Zilhicce"};
-
-                                string hAy = "";
-                                MiladiTarih miladiTarih = new MiladiTarih();
-                                HicriTarih hicriTarih = new HicriTarih();
-                                string hicriT = "";
-
-                                miladiTarih.Day = Convert.ToInt32(miladiGun.Text);
-                                miladiTarih.Month = Convert.ToInt32(miladiAy.SelectedIndex + 1);
-                                miladiTarih.Year = Convert.ToInt32(miladiYil.Text);
-
-                                hicriTarih = HijriMethods.MiladiToHicri(miladiTarih);
-                                if (hicriTarih.Month == 0)
-                                {
-                                    hAy = "";
-                                }
-                                else
-                                {
-                                    hAy = hAylar[hicriTarih.Month - 1];
-                                }
-                                hicriT = hicriTarih.Day.ToString() + " " + hAy + " " + hicriTarih.Year.ToString() + " " + hicriTarih.DayOfWeek;
-                                lblHicri.Text = hicriT;
-                                break;
-
-
-                            }
-                        }
-                        break;
-                    }
-                }
-            }
-
-        }
-
-        private void hicriGun_KeyPress(object sender, KeyPressEventArgs e)
-        {
-            if (!Char.IsDigit(e.KeyChar) && !Char.IsControl(e.KeyChar))
-            {
-                e.Handled = true;
-            }
-            if (hicriGun.TextLength > 1 && !Char.IsControl(e.KeyChar))
-            {
-                e.Handled = true;
-            }
-
-        }
-
-        private void hicriYil_KeyPress(object sender, KeyPressEventArgs e)
-        {
-            if (!Char.IsDigit(e.KeyChar) && !Char.IsControl(e.KeyChar))
-            {
-                e.Handled = true;
-            }
-            if (hicriYil.TextLength > 5 && !Char.IsControl(e.KeyChar))
-            {
-                e.Handled = true;
-            }
-
-        }
-
-        private void miladiGun_KeyPress(object sender, KeyPressEventArgs e)
-        {
-            if (!Char.IsDigit(e.KeyChar) && !Char.IsControl(e.KeyChar))
-            {
-                e.Handled = true;
-            }
-            if (miladiGun.TextLength > 1 && !Char.IsControl(e.KeyChar))
-            {
-                e.Handled = true;
             }
         }
-
-        private void miladiYil_KeyPress(object sender, KeyPressEventArgs e)
-        {
-            if (!Char.IsDigit(e.KeyChar) && !Char.IsControl(e.KeyChar))
-            {
-                e.Handled = true;
-            }
-            if (miladiYil.TextLength > 3 && !Char.IsControl(e.KeyChar))
-            {
-                e.Handled = true;
-            }
-        }
-
-        private void tabPage4_Click(object sender, EventArgs e)
-        {
-
-        }
+        #endregion
     }
 }

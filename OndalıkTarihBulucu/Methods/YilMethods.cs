@@ -17,6 +17,8 @@ namespace OndalıkTarihBulucu
             return sonuc;
         }
 
+
+        //Bir asrın 40 sene alındığı tarihler için
         public static int YilBul40(int a, int b, int c)
         {
             int sonuc = 40 * (c - 1) +

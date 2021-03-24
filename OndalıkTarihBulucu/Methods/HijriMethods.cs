@@ -24,11 +24,6 @@ namespace OndalıkTarihBulucu.Methods
             }
             return intPart;
         }
-
-
-
-
-
         public static MiladiTarih HicriToMiladi(HicriTarih hicriTarih)
         {
             //convert Lunar year from 1 to 1900  
@@ -85,8 +80,6 @@ namespace OndalıkTarihBulucu.Methods
             miladiTarih.DayOfWeek = dayOfWeek;
             return miladiTarih;            
         }
-
-
         public static HicriTarih MiladiToHicri(MiladiTarih miladiTarih)
         {
             //convert Solar year from 622 to 2500  

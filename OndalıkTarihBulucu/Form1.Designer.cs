@@ -562,7 +562,6 @@ namespace OndalıkTarihBulucu
             this.tabPage4.TabIndex = 3;
             this.tabPage4.Text = "Hicri ve Miladi ";
             this.tabPage4.UseVisualStyleBackColor = true;
-            this.tabPage4.Click += new System.EventHandler(this.tabPage4_Click);
             // 
             // label4
             // 

@@ -23,10 +23,6 @@ namespace OndalıkTarihBulucu
 
             return false;
         }
-
-
-
-
         public static int DegeriBul(Char krk)
         {
             int deger = 0;
@@ -43,11 +39,7 @@ namespace OndalıkTarihBulucu
                     break;
                 }
             }
-
-
             return deger;
         }
-
-
     }
 }
